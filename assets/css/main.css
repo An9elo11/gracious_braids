@@ -1705,6 +1705,13 @@ input, select, textarea {
 
 		}
 
+	.politique {
+		border-radius: 10%;
+		width: 24%;
+		padding: 3%;
+		font-weight: bold;
+	}
+
 /* List */
 
 	ul {
