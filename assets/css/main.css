@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic");
 @import url("fontawesome-all.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script&family=Fondamento&display=swap');
 
 /*
 	Astral by HTML5 UP
@@ -1352,48 +1353,12 @@ input, select, textarea {
 				font-size: 15pt;
 			}
 
-			#titre {
-				font-family: "Curlz MT", sans-serif;
-				font-weight: 700;
-				text-align: center;
-			}
-
-			.nom{
-				font-family: "Brush Script MT", sans-serif;
-			}
-
-			#modele {
-				font-family: Papyrus, serif;
-			}
-
-			#description {
-				font-family: Broadway, serif;
-			}
-
 		}
 
 		@media screen and (max-width: 1280px) {
 
 			body, input, textarea, select {
 				font-size: 14pt;
-			}
-
-			#titre {
-				font-family: "Curlz MT", sans-serif;
-				font-weight: 700;
-				text-align: center;
-			}
-
-			.nom{
-				font-family: "Brush Script MT", sans-serif;
-			}
-
-			#modele {
-				font-family: Papyrus, serif;
-			}
-
-			#description {
-				font-family: Broadway, serif;
 			}
 
 		}
@@ -1404,48 +1369,12 @@ input, select, textarea {
 				font-size: 12pt;
 			}
 
-			#titre {
-				font-family: "Curlz MT", sans-serif;
-				font-weight: 700;
-				text-align: center;
-			}
-
-			.nom{
-				font-family: "Brush Script MT", sans-serif;
-			}
-
-			#modele {
-				font-family: Papyrus, serif;
-			}
-
-			#description {
-				font-family: Broadway, serif;
-			}
-
 		}
 
 		@media screen and (max-width: 360px) {
 
 			body, input, textarea, select {
 				font-size: 11pt;
-			}
-
-			#titre {
-				font-family: "Curlz MT", sans-serif;
-				font-weight: 700;
-				text-align: center;
-			}
-
-			.nom{
-				font-family: "Brush Script MT", sans-serif;
-			}
-
-			#modele {
-				font-family: Papyrus, serif;
-			}
-
-			#description {
-				font-family: Broadway, serif;
 			}
 
 		}
@@ -1460,17 +1389,17 @@ input, select, textarea {
 	}
 
 	#titre {
-		font-family: "Curlz MT", sans-serif;
+		font-family: 'Pacifico', cursive;
 		font-weight: 700;
 		text-align: center;
 	}
 
 	.nom{
-		font-family: "Brush Script MT", sans-serif;
+		font-family: 'Dancing Script', cursive;
 	}
 
 	#modele {
-		font-family: Papyrus, serif;
+		font-family: 'Fondamento', serif;
 	}
 	
 	#description {
@@ -1485,19 +1414,16 @@ input, select, textarea {
 	h1 {
 		font-size: 2.4em;
 		letter-spacing: -0.015em;
-		font-family: "Curlz MT", sans-serif
 	}
 
 	h2 {
 		font-size: 1.8em;
 		letter-spacing: -0.015em;
-		font-family: Papyrus, serif;
 	}
 
 	h3, h4, h5, h6 {
 		font-size: 1.25em;
 		letter-spacing: -0.015em;
-		font-family: "Brush Script MT", sans-serif;
 	}
 
 	.centre {
@@ -1508,35 +1434,14 @@ input, select, textarea {
 
 		h1 {
 			font-size: 1.75em;
-			font-family: "Curlz MT", sans-serif
 		}
 
 		h2 {
 			font-size: 1.375em;
-			font-family: Papyrus, serif;
 		}
 
 		h3, h4, h5, h6 {
 			font-size: 1em;
-			font-family: "Brush Script MT", sans-serif;
-		}
-
-		#titre {
-			font-family: "Curlz MT", sans-serif;
-			font-weight: 700;
-			text-align: center;
-		}
-
-		.nom{
-			font-family: "Brush Script MT", sans-serif;
-		}
-
-		#modele {
-			font-family: Papyrus, serif;
-		}
-
-		#description {
-			font-family: Broadway, serif;
 		}
 
 	}
@@ -2297,7 +2202,6 @@ input, select, textarea {
 		text-align: center;
 		padding: 2em 0 0 0;
 		font-size: 0.75em;
-		font-family: "Curlz MT", sans-serif
 	}
 
 		#footer a {
@@ -2324,7 +2228,6 @@ input, select, textarea {
 				margin-left: 1em;
 				border-left: solid 1px rgba(255, 255, 255, 0.25);
 				line-height: 1;
-				font-family: "Curlz MT", sans-serif
 			}
 
 				#footer .copyright li:first-child {
@@ -2338,7 +2241,6 @@ input, select, textarea {
 			#footer .copyright li {
 				padding-left: 0.5em;
 				margin-left: 0.5em;
-				font-family: "Curlz MT", sans-serif
 			}
 
 		}
