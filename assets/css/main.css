@@ -1396,6 +1396,7 @@ input, select, textarea {
 
 	.nom{
 		font-family: 'Dancing Script', cursive;
+		text-align: center;
 	}
 
 	#modele {
