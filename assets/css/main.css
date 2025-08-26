@@ -1339,7 +1339,7 @@ input, select, textarea {
 		}
 
 	body, input, textarea, select {
-		font-family: "Times New Roman", sans-serif;;
+		/*font-family: 'Source Sans Pro', sans-serif;*/
 		font-weight: 300;
 		color: #777777;
 		font-size: 20pt;
@@ -1352,48 +1352,12 @@ input, select, textarea {
 				font-size: 15pt;
 			}
 
-			#titre {
-				font-family: "Curlz MT", sans-serif;
-				font-weight: 700;
-				text-align: center;
-			}
-
-			.nom{
-				font-family: "Times New Roman", sans-serif;
-			}
-
-			#modele {
-				font-family: "Times New Roman", sans-serif;
-			}
-
-			#description {
-				font-family: "Times New Roman", sans-serif;
-			}
-
 		}
 
 		@media screen and (max-width: 1280px) {
 
 			body, input, textarea, select {
 				font-size: 14pt;
-			}
-
-			#titre {
-				font-family: "Times New Roman", sans-serif;
-				font-weight: 700;
-				text-align: center;
-			}
-
-			.nom{
-				font-family: "Times New Roman", sans-serif;
-			}
-
-			#modele {
-				font-family: "Times New Roman", sans-serif;
-			}
-
-			#description {
-				font-family: "Times New Roman", sans-serif;
 			}
 
 		}
@@ -1404,48 +1368,12 @@ input, select, textarea {
 				font-size: 12pt;
 			}
 
-			#titre {
-				font-family: "Times New Roman", sans-serif;
-				font-weight: 700;
-				text-align: center;
-			}
-
-			.nom{
-				font-family: "Times New Roman", sans-serif;
-			}
-
-			#modele {
-				font-family: "Times New Roman", sans-serif;
-			}
-
-			#description {
-				font-family: "Times New Roman", sans-serif;
-			}
-
 		}
 
 		@media screen and (max-width: 360px) {
 
 			body, input, textarea, select {
 				font-size: 11pt;
-			}
-
-			#titre {
-				font-family: "Curlz MT", sans-serif;
-				font-weight: 700;
-				text-align: center;
-			}
-
-			.nom{
-				font-family: "Times New Roman", sans-serif;
-			}
-
-			#modele {
-				font-family: "Times New Roman", sans-serif;
-			}
-
-			#description {
-				font-family: "Times New Roman", sans-serif;
 			}
 
 		}
@@ -1460,21 +1388,21 @@ input, select, textarea {
 	}
 
 	#titre {
-		font-family: "Times New Roman", sans-serif;
+		font-family: "Curlz MT", sans-serif;
 		font-weight: 700;
 		text-align: center;
 	}
 
 	.nom{
-		font-family: "Times New Roman", sans-serif;
+		font-family: "Brush Script MT", sans-serif;
 	}
 
 	#modele {
-		font-family: "Times New Roman", sans-serif;
+		font-family: Papyrus, serif;
 	}
 	
 	#description {
-		font-family: "Times New Roman", sans-serif;
+		font-family: Broadway, serif;
 	}
 
 	.book{
@@ -1485,19 +1413,16 @@ input, select, textarea {
 	h1 {
 		font-size: 2.4em;
 		letter-spacing: -0.015em;
-		font-family: "Times New Roman", sans-serif;
 	}
 
 	h2 {
 		font-size: 1.8em;
 		letter-spacing: -0.015em;
-		font-family: "Times New Roman", sans-serif;
 	}
 
 	h3, h4, h5, h6 {
 		font-size: 1.25em;
 		letter-spacing: -0.015em;
-		font-family: "Times New Roman", sans-serif;
 	}
 
 	.centre {
@@ -1508,17 +1433,14 @@ input, select, textarea {
 
 		h1 {
 			font-size: 1.75em;
-			font-family: "Times New Roman", sans-serif;
 		}
 
 		h2 {
 			font-size: 1.375em;
-			font-family: "Times New Roman", sans-serif;
 		}
 
 		h3, h4, h5, h6 {
 			font-size: 1em;
-			font-family: "Times New Roman", sans-serif;
 		}
 
 	}
