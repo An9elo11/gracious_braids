@@ -2243,3 +2243,21 @@ input, select, textarea {
 			}
 
 		}
+
+#titre {
+	font-family: "Curlz MT", sans-serif;
+	font-weight: 700;
+	text-align: center;
+}
+
+.nom{
+	font-family: "Brush Script MT", sans-serif;
+}
+
+#modele {
+	font-family: Papyrus, serif;
+}
+
+#description {
+	font-family: Broadway, serif;
+}
