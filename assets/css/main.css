@@ -1352,12 +1352,48 @@ input, select, textarea {
 				font-size: 15pt;
 			}
 
+			#titre {
+				font-family: "Curlz MT", sans-serif;
+				font-weight: 700;
+				text-align: center;
+			}
+
+			.nom{
+				font-family: "Brush Script MT", sans-serif;
+			}
+
+			#modele {
+				font-family: Papyrus, serif;
+			}
+
+			#description {
+				font-family: Broadway, serif;
+			}
+
 		}
 
 		@media screen and (max-width: 1280px) {
 
 			body, input, textarea, select {
 				font-size: 14pt;
+			}
+
+			#titre {
+				font-family: "Curlz MT", sans-serif;
+				font-weight: 700;
+				text-align: center;
+			}
+
+			.nom{
+				font-family: "Brush Script MT", sans-serif;
+			}
+
+			#modele {
+				font-family: Papyrus, serif;
+			}
+
+			#description {
+				font-family: Broadway, serif;
 			}
 
 		}
@@ -1368,12 +1404,48 @@ input, select, textarea {
 				font-size: 12pt;
 			}
 
+			#titre {
+				font-family: "Curlz MT", sans-serif;
+				font-weight: 700;
+				text-align: center;
+			}
+
+			.nom{
+				font-family: "Brush Script MT", sans-serif;
+			}
+
+			#modele {
+				font-family: Papyrus, serif;
+			}
+
+			#description {
+				font-family: Broadway, serif;
+			}
+
 		}
 
 		@media screen and (max-width: 360px) {
 
 			body, input, textarea, select {
 				font-size: 11pt;
+			}
+
+			#titre {
+				font-family: "Curlz MT", sans-serif;
+				font-weight: 700;
+				text-align: center;
+			}
+
+			.nom{
+				font-family: "Brush Script MT", sans-serif;
+			}
+
+			#modele {
+				font-family: Papyrus, serif;
+			}
+
+			#description {
+				font-family: Broadway, serif;
 			}
 
 		}
