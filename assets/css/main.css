@@ -1339,7 +1339,7 @@ input, select, textarea {
 		}
 
 	body, input, textarea, select {
-		font-family: 'Source Sans Pro', sans-serif;
+		/*font-family: 'Source Sans Pro', sans-serif;*/
 		font-weight: 300;
 		color: #777777;
 		font-size: 20pt;
@@ -1392,7 +1392,11 @@ input, select, textarea {
 		font-weight: 700;
 		text-align: center;
 	}
-	
+
+	.nom{
+		font-family: "Brush Script MT", sans-serif;
+	}
+
 	#modele {
 		font-family: Papyrus, serif;
 	}
