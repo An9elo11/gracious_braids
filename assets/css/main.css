@@ -1346,7 +1346,7 @@ input, select, textarea {
 		line-height: 1.75em;
 	}
 
-		/*@media screen and (max-width: 1680px) {
+		@media screen and (max-width: 1680px) {
 
 			body, input, textarea, select {
 				font-size: 15pt;
@@ -1376,7 +1376,7 @@ input, select, textarea {
 				font-size: 11pt;
 			}
 
-		}*/
+		}
 
 	strong, b, h1, h2, h3, h4, h5, h6, p {
 		font-weight: 400;
@@ -1429,7 +1429,7 @@ input, select, textarea {
 		text-align: center;
 	}
 
-	/*@media screen and (max-width: 736px) {
+	@media screen and (max-width: 736px) {
 
 		h1 {
 			font-size: 1.75em;
@@ -1443,7 +1443,7 @@ input, select, textarea {
 			font-size: 1em;
 		}
 
-	}*/
+	}
 
 	blockquote {
 		border-left: solid 0.5em #ddd;
@@ -1792,8 +1792,8 @@ input, select, textarea {
 			-moz-osx-font-smoothing: grayscale;
 			-webkit-font-smoothing: antialiased;
 			display: inline-block;
-			/*font-style: normal;
-			font-variant: normal;*/
+			font-style: normal;
+			font-variant: normal;
 			text-rendering: auto;
 			line-height: 1;
 			text-transform: none !important;
