@@ -72,6 +72,21 @@ input, select, textarea {
 	appearance: none;
 }
 
+.politique {
+	text-align: center;
+}
+
+.titre{
+	text-align: center;
+}
+
+.book{
+	display: inline-block;
+	align-items: center;
+	/*float: unset;*/
+
+}
+
 /* Row */
 
 	.row {
@@ -1306,10 +1321,9 @@ input, select, textarea {
 	}
 
 	body {
-		background-image: url("images/overlay.png"), url("images/bg.jpg");
-		background-repeat: repeat, no-repeat;
+		/*background-image: url("images/overlay.png"), url("images/bg.jpg");*/
 		background-size: auto, 100% 100%;
-		background-attachment: fixed;
+		background: linear-gradient(pink, purple);
 		overflow-y: scroll;
 	}
 
@@ -1374,8 +1388,9 @@ input, select, textarea {
 	}
 
 	#titre {
-		font-family: "Curlz MT", serif;
+		font-family: "Curlz MT", sans-serif;
 		font-weight: 700;
+		text-align: center;
 	}
 	
 	#modele {
@@ -1384,6 +1399,11 @@ input, select, textarea {
 	
 	#description {
 		font-family: Broadway, serif;
+	}
+
+	.book{
+		display: flex;
+		justify-content: center;
 	}
 
 	h1 {
@@ -1705,12 +1725,6 @@ input, select, textarea {
 
 		}
 
-	.politique {
-		border-radius: 10%;
-		width: 24%;
-		padding: 3%;
-		font-weight: bold;
-	}
 
 /* List */
 
@@ -2129,7 +2143,7 @@ input, select, textarea {
 
 					#main > .panel.intro header p {
 						letter-spacing: -0.015em;
-						font-size: 1.25em;
+						font-size: 0.75em;
 						margin: 0.25em 0 0 0;
 					}
 
@@ -2171,6 +2185,10 @@ input, select, textarea {
 						}
 
 				}
+
+#main > .panel .arrow{
+	float : right;
+}
 
 /* Footer */
 
