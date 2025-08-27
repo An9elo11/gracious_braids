@@ -77,6 +77,10 @@ input, select, textarea {
 	text-align: center;
 }
 
+#polt{
+	margin-top: -0.75em;
+}
+
 .titre{
 	text-align: center;
 }
@@ -1998,7 +2002,7 @@ input, select, textarea {
 	#main {
 		position: relative;
 		overflow: hidden;
-		width: 120%;
+		width: 100%;
 		background: #ffffff;
 		box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.25);
 		-moz-transition: min-height 0.5s ease-in-out, max-height 0.5s ease-in-out;
@@ -2150,7 +2154,7 @@ input, select, textarea {
 					#main > .panel.intro header p {
 						letter-spacing: -0.015em;
 						font-size: 0.75em;
-						margin: 0em -2em;
+						margin: 0.5em -3em -1.5em -3em;
 					}
 
 				@media screen and (max-width: 980px) {
