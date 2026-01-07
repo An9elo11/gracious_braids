@@ -68,11 +68,14 @@ input, select, textarea {
 }
 
 .politique {
-	font-size: 10pt;
+	font-size: 9pt;
+	margin-bottom: -1em;
 }
 
 #polt{
 	margin-top: -0.75em;
+	margin-bottom: 0.8em;
+	font-size: 15pt;
 }
 
 .titre{
@@ -84,6 +87,39 @@ input, select, textarea {
 	align-items: center;
 	/*float: unset;*/
 
+}
+
+.prix{
+
+}
+
+#SM, #AM{
+	display: none;
+	transition: all 0.3s ease;
+	text-align: center;
+}
+
+#affSM, #affAM {
+	cursor: pointer;
+	font-weight: 1000;
+	font-size: 1.3em;
+}
+
+.arrow {
+	transition: transform 0.3s ease-in-out;
+}
+
+.arrow.active {
+	transform: rotate(90deg);
+}
+
+hr.short {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.reservation{
+	text-align: center;
 }
 
 /* Row */
@@ -1649,6 +1685,9 @@ input, select, textarea {
 		cursor: pointer;
 		outline: 0;
 		padding: 0.7em 1.5em 0.7em 1.5em;
+		border-radius: 8px;
+		box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
 	}
 
 		input[type="button"]:hover,
@@ -1727,6 +1766,11 @@ input, select, textarea {
 				width: 100%;
 			}
 
+		}
+
+		.button {
+			box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+			background: linear-gradient(135deg, pink, violet);
 		}
 
 
