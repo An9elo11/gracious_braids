@@ -6,17 +6,23 @@ document.addEventListener('DOMContentLoaded', async function () {
     const calendarEl = document.getElementById('calendar');
     if(!calendarEl) return; // empêche erreur sur autres pages
 
+    const isMobile = window.innerWidth <= 768;
+
     const calendar = new FullCalendar.Calendar(calendarEl, {
 
-        initialView: 'timeGridWeek',
+        initialView: isMobile ? 'dayGridDay' : 'timeGridWeek',
+
         selectable: true,
 
+        selectMirror: true,
+        selectLongPressDelay: 200,
+
         // Header avec navigation et vue
-        headerToolbar: {
+        /*headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'timeGridWeek,timeGridDay'
-        },
+        },*/
 
         // Affichage des heures
         slotMinTime: '08:00:00',
@@ -44,10 +50,25 @@ document.addEventListener('DOMContentLoaded', async function () {
             alert(`Créneau choisi : ${selectedDate} ${selectedTime}`);
         },
 
+
         // Styles par défaut pour les événements
         eventBackgroundColor: '#6c5ce7',
         eventBorderColor: '#341f97',
-        eventTextColor: '#ffffff'
+        eventTextColor: '#ffffff',
+
+        // mobile friendly : taper sur un événement
+        eventTouchStart: function(info){
+            console.log("Événement touché :", info.event);
+        },
+
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: isMobile ? 'dayGridDay' : 'timeGridWeek,timeGridDay'
+        },
+
+        height: 'auto', // pour s’adapter aux petits écrans
+
     });
 
     calendar.render();
