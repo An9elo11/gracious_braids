@@ -225,11 +225,16 @@
             <header>
                 <h1>Réservations</h1>
             </header>
-            <div id="calendar"></div>
 
-            <div id="selected-style-display"></div>
+            <!-- Conteneur du calendrier avec une classe pro -->
+            <div id="calendar" class="calendar-container"></div>
 
-            <form id="booking-form">
+            <!-- Affichage coiffure sélectionnée -->
+            <div id="selected-style-display" class="selected-style"></div>
+
+            <!-- Formulaire de réservation -->
+            <form id="booking-form" class="booking-form">
+
                 <label for="name"></label>
                 <input type="text" id="name" placeholder="Nom" required>
 
@@ -238,17 +243,11 @@
 
                 <label for="phone"></label>
                 <input type="tel" id="phone" placeholder="Téléphone" required>
-
-                <!--label for="service"></label>
-                <select id="service">
-                    <option value="Coupe homme">Coupe homme</option>
-                    <option value="Coupe femme">Coupe femme</option>
-                </select-->
                 <br><br>
-                <button type="submit">Réserver</button>
+                <button type="submit" class="btn-submit">Réserver</button>
             </form>
-
         </article>
+
 
         <!-- Contact -->
         <!--article id="contact" class="panel">
