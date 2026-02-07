@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+    <!--link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet"-->
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <!--script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script-->
+
 </head>
 <body class="is-preload">
 
@@ -17,6 +23,7 @@
     <nav id="nav">
         <!--a href="#" class="icon solid fa-home"><span>Home</span></a-->
         <a href="#work" class="icon solid fa-folder"><span>Modèles</span></a>
+        <a href="#book" class="icon solid fa-calendar"><span>Réservation</span></a>
         <a href="https://www.instagram.com/coiffeuse_a_montreal?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="icon brands fa-instagram" target="_blank"><span>Instagram</span></a>
         <a href="https://www.tiktok.com/@coiffeusemontreal?is_from_webapp=1&sender_device=pc" class="icon brands fa-tiktok" target="_blank"><span>TikTok</span></a>
     </nav>
@@ -213,6 +220,36 @@
             </section>
         </article>
 
+        <!-- Booking -->
+        <article id="book" class="panel">
+            <header>
+                <h1>Réservations</h1>
+            </header>
+            <div id="calendar"></div>
+
+            <div id="selected-style-display"></div>
+
+            <form id="booking-form">
+                <label for="name"></label>
+                <input type="text" id="name" placeholder="Nom" required>
+
+                <label for="email"></label>
+                <input type="email" id="email" placeholder="Email" required>
+
+                <label for="phone"></label>
+                <input type="tel" id="phone" placeholder="Téléphone" required>
+
+                <label for="service"></label>
+                <select id="service">
+                    <option value="Coupe homme">Coupe homme</option>
+                    <option value="Coupe femme">Coupe femme</option>
+                </select>
+
+                <button type="submit">Réserver</button>
+            </form>
+
+        </article>
+
         <!-- Contact -->
         <!--article id="contact" class="panel">
             <header>
@@ -254,6 +291,10 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="assets/js/supabaseClient.js"></script>
+<script src="assets/js/booking.js"></script>
+<script src="assets/js/calendar.js"></script>
 
 </body>
 </html>

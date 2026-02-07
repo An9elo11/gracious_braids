@@ -15,8 +15,9 @@
 
   <!-- Nav -->
   <nav id="nav">
-    <a href="index.html" class="icon solid fa-home"><span>Home</span></a>
+    <!--a href="#" class="icon solid fa-home"><span>Home</span></a-->
     <a href="#work" class="icon solid fa-folder"><span>Modèles</span></a>
+    <a href="index.html#book" class="icon solid fa-calendar"><span>Réservation</span></a>
     <a href="https://www.instagram.com/coiffeuse_a_montreal?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="icon brands fa-instagram" target="_blank"><span>Instagram</span></a>
     <a href="https://www.tiktok.com/@coiffeusemontreal?is_from_webapp=1&sender_device=pc" class="icon brands fa-tiktok" target="_blank"><span>TikTok</span></a>
   </nav>
@@ -32,15 +33,21 @@
       <section>
         <div class="row">
           <div class="col-3 col-6-medium col-12-small">
-            <img class="image fit" src="images/V2/50-Hommes/redim/1.jpg" alt="">
+            <div class="hairstyle"  data-id="1-SM-1"  data-image="images/V2/50-Hommes/redim/1.jpg">
+              <img class="image fit" src="images/V2/50-Hommes/redim/1.jpg" alt="">
+            </div>
           </div>
 
           <div class="col-3 col-6-medium col-12-small">
-            <img class="image fit" src="images/V2/50-Hommes/redim/2.jpg" alt="">
+            <div class="hairstyle"  data-id="1-SM-2"  data-image="images/V2/50-Hommes/redim/2.jpg">
+              <img class="image fit" src="images/V2/50-Hommes/redim/2.jpg" alt="">
+            </div>
           </div>
 
           <div class="col-3 col-6-medium col-12-small">
-            <img class="image fit" src="images/V2/50-Hommes/redim/3.jpg" alt="">
+            <div class="hairstyle"  data-id="1-SM-3"  data-image="images/V2/50-Hommes/redim/3.jpg">
+              <img class="image fit" src="images/V2/50-Hommes/redim/3.jpg" alt="">
+            </div>
           </div>
 
           <div class="col-3 col-6-medium col-12-small">
@@ -98,6 +105,28 @@
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/supabaseClient.js"></script>
+<script src="assets/js/calendar.js"></script>
+<script src="assets/js/booking.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll(".hairstyle").forEach(style => {
+
+      style.addEventListener("click", () => {
+
+        localStorage.setItem("selectedStyleId", style.dataset.id);
+        localStorage.setItem("selectedStyleImage", style.dataset.image);
+
+        window.location.href = "index.html#book";
+
+      });
+
+    });
+
+  });
+</script>
 
 </body>
 </html>
