@@ -8,6 +8,7 @@
 console.log("Hello from Functions!")*/
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { Resend } from "npm:resend";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -16,65 +17,47 @@ const corsHeaders = {
 
 serve(async (req) => {
 
-  // ✅ Gestion CORS (obligatoire)
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
   try {
 
-    // ✅ Lire les données envoyées depuis le site
     const { name, email, date, time, hairstyle } = await req.json();
 
-    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+    const resend = new Resend(
+        Deno.env.get("RESEND_API_KEY")
+    );
 
-    if (!RESEND_API_KEY) {
-      throw new Error("RESEND_API_KEY manquante");
-    }
-
-    // ✅ Appel API Resend
-    const resendResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        from: "Salon <onboarding@resend.dev>",
-        to: email,
-        subject: "Confirmation de réservation",
-        html: `
-          <h2>Réservation confirmée</h2>
-          <p><strong>Nom :</strong> ${name}</p>
-          <p><strong>Coiffure :</strong> ${hairstyle}</p>
-          <p><strong>Date :</strong> ${date}</p>
-          <p><strong>Heure :</strong> ${time}</p>
-        `
-      })
+    const { data, error } = await resend.emails.send({
+      from: "Salon <onboarding@resend.dev>",
+      to: email,
+      subject: "Confirmation de réservation",
+      html: `
+        <h2>Réservation confirmée</h2>
+        <p><strong>Nom :</strong> ${name}</p>
+        <p><strong>Coiffure :</strong> ${hairstyle}</p>
+        <p><strong>Date :</strong> ${date}</p>
+        <p><strong>Heure :</strong> ${time}</p>
+      `
     });
 
-    const resendData = await resendResponse.json();
+    if (error) {
+      throw error;
+    }
 
-    // ✅ Retour succès
     return new Response(
-        JSON.stringify({
-          success: true,
-          resend: resendData
-        }),
+        JSON.stringify({ success: true, data }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
           status: 200
         }
     );
 
-  } catch (error) {
+  } catch (err) {
 
-    // ✅ Retour erreur propre
     return new Response(
-        JSON.stringify({
-          success: false,
-          error: error.message
-        }),
+        JSON.stringify({ success: false, error: err.message }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
           status: 400
@@ -84,7 +67,6 @@ serve(async (req) => {
   }
 
 });
-
 
 
 /* To invoke locally:
