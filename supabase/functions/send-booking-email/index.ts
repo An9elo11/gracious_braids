@@ -23,15 +23,15 @@ serve(async (req) => {
 
   try {
 
-    const { name, email, date, time, hairstyle } = await req.json();
+    const { name, email, date, time, hairstyle, image } = await req.json();
 
     const resend = new Resend(
         Deno.env.get("RESEND_API_KEY")
     );
 
     const { data, error } = await resend.emails.send({
-      from: "Salon <onboarding@resend.dev>",
-      to: email,
+      from: "Gracious Hair <onboarding@resend.dev>",
+      to: [email,"kouakanange@gmail.com"],
       subject: "Confirmation de réservation",
       html: `
         <h2>Réservation confirmée</h2>
@@ -39,6 +39,9 @@ serve(async (req) => {
         <p><strong>Coiffure :</strong> ${hairstyle}</p>
         <p><strong>Date :</strong> ${date}</p>
         <p><strong>Heure :</strong> ${time}</p>
+        
+        <h3>Votre modèle :</h3>
+          <img src="${image}" width="250" style="border-radius:10px"/>
       `
     });
 
