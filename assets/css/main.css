@@ -182,6 +182,86 @@ hr.short {
 	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+/* Conteneur booking */
+#book {
+	padding: 15px;
+}
+
+/* FullCalendar conteneur */
+#calendar {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 25px;
+}
+
+/* Corrige largeur sur mobile */
+@media (max-width: 768px) {
+
+	.panel {
+		width: 95% !important;
+		margin: auto;
+		padding: 15px;
+	}
+
+	#calendar {
+		font-size: 14px;
+	}
+
+}
+
+/* Taille des cellules */
+.fc-timegrid-slot {
+	height: 60px !important;
+}
+
+/* Rend les événements cliquables facilement */
+.fc-timegrid-slot-lane {
+	cursor: pointer;
+}
+
+.fc-toolbar {
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.fc-toolbar-title {
+	font-size: 18px !important;
+}
+
+#selected-style-display {
+	text-align: center;
+	margin: 20px 0;
+}
+
+#selected-style-display img {
+	width: 120px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+#booking-form input {
+	width: 100%;
+	padding: 14px;
+	margin-bottom: 15px;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	font-size: 16px;
+}
+
+#booking-form button {
+	width: 100%;
+	padding: 16px;
+	font-size: 16px;
+	border-radius: 10px;
+}
+
+.fc {
+	background: white;
+	border-radius: 12px;
+	padding: 10px;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
 
 /* Row */
 
