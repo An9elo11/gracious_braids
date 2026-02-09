@@ -5,6 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const display = document.getElementById("selected-style-display");
 
+    // Observer changement de taille du bloc coiffure
+    if(display){
+
+        const resizeObserver = new ResizeObserver(() => {
+            if(window.calendar){
+                window.calendar.updateSize();
+            }
+        });
+
+        resizeObserver.observe(display);
+    }
+
     if(display && selectedStyleId && selectedStyleImage){
 
         display.innerHTML = `
@@ -12,6 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="${selectedStyleImage}" width="150">
             <p>${selectedStyleId}</p>
         `;
+
+        setTimeout(() => {
+            if(window.calendar){
+                window.calendar.updateSize();
+            }
+        }, 100);
+
     }
 
     const form = document.getElementById("booking-form");

@@ -121,7 +121,7 @@ hr.short {
 	margin: 0 auto 30px;
 	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 	border-radius: 10px;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 /* Header et titres */
@@ -262,6 +262,28 @@ hr.short {
 	box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+
+#selected-style-display {
+	min-height: 120px;
+}
+
+@media screen and (max-width: 1280px) {
+	#selected-style-display {
+		min-height: 120px;
+	}
+}
+
+@media screen and (max-width: 980px) {
+	#selected-style-display {
+		min-height: 120px;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	#selected-style-display {
+		min-height: 120px;
+	}
+}
 
 /* Row */
 
@@ -2189,7 +2211,7 @@ hr.short {
 
 	#main {
 		position: relative;
-		overflow: hidden;
+		overflow: visible;
 		width: 100%;
 		background: #ffffff;
 		box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.25);

@@ -8,14 +8,21 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const isMobile = window.innerWidth <= 768;
 
-    const calendar = new FullCalendar.Calendar(calendarEl, {
+    window.calendar = new FullCalendar.Calendar(calendarEl, {
 
-        initialView: isMobile ? 'dayGridDay' : 'timeGridWeek',
+        initialView: isMobile ? 'timeGridDay' : 'timeGridWeek',
 
         selectable: true,
 
         selectMirror: true,
-        selectLongPressDelay: 200,
+        selectLongPressDelay: 0,
+
+        datesSet: function () {
+            setTimeout(() => {
+                window.calendar.updateSize();
+            }, 100);
+        },
+
 
         // Header avec navigation et vue
         /*headerToolbar: {
@@ -73,6 +80,22 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     calendar.render();
     loadReservations(calendar);
+
+    document.querySelectorAll('a[href="#book"]').forEach(link => {
+        link.addEventListener('click', () => {
+            setTimeout(() => {
+                if(window.calendar){
+                    window.calendar.updateSize();
+                }
+            }, 300);
+        });
+    });
+});
+
+window.addEventListener("resize", () => {
+    if(window.calendar){
+        window.calendar.updateSize();
+    }
 });
 
 // Fonction pour afficher les réservations existantes
