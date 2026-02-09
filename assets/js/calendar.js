@@ -1,10 +1,11 @@
 let selectedDate = null;
 let selectedTime = null;
+let previewEvent = null; // empêche empilement visuel
 
 document.addEventListener('DOMContentLoaded', async function () {
 
     const calendarEl = document.getElementById('calendar');
-    if(!calendarEl) return; // empêche erreur sur autres pages
+    if(!calendarEl) return;
 
     const isMobile = window.innerWidth <= 768;
 
@@ -15,26 +16,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         selectable: true,
         selectMirror: true,
         selectLongPressDelay: 250,
-        //selectMinDistance: 8,
-        //unselectAuto: true,
 
-        datesSet: function () {
-            setTimeout(() => {
-                window.calendar.updateSize();
-            }, 100);
+        datesSet() {
+            setTimeout(() => window.calendar.updateSize(), 100);
         },
 
-
-        // Header avec navigation et vue
-        /*headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'timeGridWeek,timeGridDay'
-        },*/
-
-        // Affichage des heures
         slotMinTime: '08:00:00',
         slotMaxTime: '20:00:00',
+
         slotLabelFormat: {
             hour: '2-digit',
             minute: '2-digit',
@@ -47,27 +36,42 @@ document.addEventListener('DOMContentLoaded', async function () {
             endTime: '18:00'
         },
 
-        // Sélection d’un créneau
-        select: function(info) {
+        select(info) {
+
+            const duration = Number(localStorage.getItem("selectedStyleDuration"));
+
+            if(!duration){
+                alert("Veuillez choisir une coiffure avant.");
+                window.calendar.unselect();
+                return;
+            }
+
             selectedDate = info.startStr.split("T")[0];
             selectedTime = info.startStr.split("T")[1].substring(0,5);
 
             localStorage.setItem("selectedDate", selectedDate);
             localStorage.setItem("selectedTime", selectedTime);
 
-            alert(`Créneau choisi : ${selectedDate} ${selectedTime}`);
+            const endDate = addMinutes(info.start, duration);
+
+            // Supprimer ancienne preview
+            if(previewEvent){
+                previewEvent.remove();
+            }
+
+            previewEvent = window.calendar.addEvent({
+                start: info.start,
+                end: endDate,
+                display: 'background',
+                backgroundColor: '#6c5ce7'
+            });
+
+            alert(`Créneau choisi : ${selectedDate} ${selectedTime} (${duration} min)`);
         },
 
-
-        // Styles par défaut pour les événements
         eventBackgroundColor: '#6c5ce7',
         eventBorderColor: '#341f97',
         eventTextColor: '#ffffff',
-
-        // mobile friendly : taper sur un événement
-        eventTouchStart: function(info){
-            console.log("Événement touché :", info.event);
-        },
 
         headerToolbar: {
             left: 'today',
@@ -75,22 +79,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             right: 'prev,next'
         },
 
-        height: 'auto', // pour s’adapter aux petits écrans
-
+        height: 'auto'
     });
 
-    calendar.render();
-    loadReservations(calendar);
-
-    document.querySelectorAll('a[href="#book"]').forEach(link => {
-        link.addEventListener('click', () => {
-            setTimeout(() => {
-                if(window.calendar){
-                    window.calendar.updateSize();
-                }
-            }, 300);
-        });
-    });
+    window.calendar.render();
+    loadReservations(window.calendar);
 });
 
 window.addEventListener("resize", () => {
@@ -99,28 +92,37 @@ window.addEventListener("resize", () => {
     }
 });
 
-// Fonction pour afficher les réservations existantes
+
+// 🔹 Charger réservations existantes
 async function loadReservations(calendar){
-    const { data } = await supabaseClient
+
+    const { data, error } = await supabaseClient
         .from('reservations')
         .select('*');
 
+    if(error || !data) return;
+
     data.forEach(res => {
+
+        if(!res.duration) return;
+
+        const start = new Date(`${res.appointment_date}T${res.appointment_time}`);
+        const end = addMinutes(start, res.duration);
+
         calendar.addEvent({
-            start: res.appointment_date + "T" + res.appointment_time,
-            end: res.appointment_date + "T" + add30min(res.appointment_time),
+            start,
+            end,
             display: 'background',
-            backgroundColor: '#d63031', // rouge pour créneau occupé
+            backgroundColor: '#d63031',
             borderColor: '#b71c1c'
         });
     });
 }
 
-// Ajouter 30 minutes à l’heure de fin
-function add30min(time){
-    let [h,m] = time.split(":");
-    let date = new Date();
-    date.setHours(h);
-    date.setMinutes(Number(m) + 30);
-    return date.toTimeString().substring(0,5);
+
+// 🔹 Ajouter X minutes
+function addMinutes(date, minutes){
+    const newDate = new Date(date);
+    newDate.setMinutes(newDate.getMinutes() + Number(minutes));
+    return newDate;
 }

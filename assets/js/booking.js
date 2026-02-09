@@ -2,27 +2,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let selectedStyleId = localStorage.getItem("selectedStyleId");
     let selectedStyleImage = localStorage.getItem("selectedStyleImage");
+    let selectedStyleDuration = Number(localStorage.getItem("selectedStyleDuration"));
 
     const display = document.getElementById("selected-style-display");
 
-    // Observer changement de taille du bloc coiffure
+    // Ajustement calendrier si bloc change taille
     if(display){
-
         const resizeObserver = new ResizeObserver(() => {
             if(window.calendar){
                 window.calendar.updateSize();
             }
         });
-
         resizeObserver.observe(display);
     }
 
-    if(display && selectedStyleId && selectedStyleImage){
+    // Affichage coiffure choisie
+    if(display && selectedStyleId){
 
         display.innerHTML = `
             <h3>Coiffure choisie :</h3>
             <img src="${selectedStyleImage}" width="150">
             <p>${selectedStyleId}</p>
+            <p><strong>Durée :</strong> ${selectedStyleDuration || 0} min</p>
         `;
 
         setTimeout(() => {
@@ -30,26 +31,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.calendar.updateSize();
             }
         }, 100);
-
     }
 
     const form = document.getElementById("booking-form");
-
     if(!form) return;
 
     form.addEventListener("submit", async function(e){
 
         e.preventDefault();
 
-        let selectedDate = localStorage.getItem("selectedDate");
-        let selectedTime = localStorage.getItem("selectedTime");
+        const selectedDate = localStorage.getItem("selectedDate");
+        const selectedTime = localStorage.getItem("selectedTime");
 
         if(!selectedDate || !selectedTime){
             alert("Choisissez un créneau");
             return;
         }
 
-        if(!selectedStyleId){
+        if(!selectedStyleId || !selectedStyleDuration){
             alert("Choisissez une coiffure");
             return;
         }
@@ -60,24 +59,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
-            // ✅ Vérifier si le créneau est déjà réservé
-            const { data: existingReservation, error: checkError } = await supabaseClient
+            // 🔍 Vérifier chevauchement
+            const { data: reservations, error } = await supabaseClient
                 .from("reservations")
                 .select("*")
-                .eq("appointment_date", selectedDate)
-                .eq("appointment_time", selectedTime);
+                .eq("appointment_date", selectedDate);
 
-            if(checkError){
-                throw checkError;
+            if(error) throw error;
+
+            const newStart = new Date(`${selectedDate}T${selectedTime}`);
+            const newEnd = new Date(newStart);
+            newEnd.setMinutes(newEnd.getMinutes() + selectedStyleDuration);
+
+            for(const r of reservations){
+
+                if(!r.duration) continue;
+
+                const start = new Date(`${r.appointment_date}T${r.appointment_time}`);
+                const end = new Date(start);
+                end.setMinutes(end.getMinutes() + r.duration);
+
+                if(newStart < end && newEnd > start){
+                    alert("Ce créneau chevauche une réservation existante.");
+                    return;
+                }
             }
 
-            if(existingReservation.length > 0){
-                alert("Ce créneau est déjà réservé.");
-                return;
-            }
-
-            // ✅ Ajouter réservation
-            const { error } = await supabaseClient
+            // ➕ Ajouter réservation
+            const { error: insertError } = await supabaseClient
                 .from("reservations")
                 .insert([{
                     name,
@@ -85,46 +94,40 @@ document.addEventListener("DOMContentLoaded", () => {
                     phone,
                     hairstyle_id: selectedStyleId,
                     appointment_date: selectedDate,
-                    appointment_time: selectedTime
+                    appointment_time: selectedTime,
+                    duration: selectedStyleDuration
                 }]);
 
-            if(error){
-                throw error;
+            if(insertError) throw insertError;
+
+            // Envoyer email de confirmation
+            const { data, error: emailError } =
+                await supabaseClient.functions.invoke("send-booking-email", {
+                    body: {
+                        name,
+                        email,
+                        date: selectedDate,
+                        time: selectedTime,
+                        duration: selectedStyleDuration,
+                        hairstyle: selectedStyleId,
+                        image: selectedStyleImage
+                    }
+                });
+
+            if(emailError){
+                console.error("Erreur email :", emailError);
             }
 
-            // ✅ Envoyer email confirmation
-            const { data, error: functionError } =
-                await supabaseClient.functions.invoke(
-                    "send-booking-email",
-                    {
-                        body: {
-                            name,
-                            email,
-                            date: selectedDate,
-                            time: selectedTime,
-                            hairstyle: selectedStyleId,
-                            image: selectedStyleImage
-                        }
-                    }
-                );
+            alert("Réservation confirmée !");
 
-            console.log("Function response:", data);
-            console.log("Function error:", functionError);
-
-            // Nettoyage stockage local
-            localStorage.removeItem("selectedStyleId");
-            localStorage.removeItem("selectedStyleImage");
             localStorage.removeItem("selectedDate");
             localStorage.removeItem("selectedTime");
 
-            alert("Réservation confirmée !");
             location.reload();
 
         } catch(err){
             console.error(err);
             alert("Erreur lors de la réservation.");
         }
-
     });
-
 });

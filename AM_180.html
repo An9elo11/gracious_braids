@@ -32,23 +32,33 @@
             <section>
                 <div class="row">
                     <div class="col-3 col-6-medium col-12-small">
-                        <img class="image fit" src="images/V2/AM-180/redim/modele%20(1).jpg" alt="">
+                        <div class="hairstyle"  data-id="3-AM-1"  data-image="images/V2/AM-180/redim/modele%20(1).jpg" data-duration="390">
+                            <img class="image fit" src="images/V2/AM-180/redim/modele%20(1).jpg" alt="">
+                        </div>
                     </div>
 
                     <div class="col-3 col-6-medium col-12-small">
-                        <img class="image fit" src="images/V2/AM-180/redim/modele%20(2).jpg" alt="">
+                        <div class="hairstyle"  data-id="3-AM-2"  data-image="images/V2/AM-180/redim/modele%20(2).jpg" data-duration="390">
+                            <img class="image fit" src="images/V2/AM-180/redim/modele%20(2).jpg" alt="">
+                        </div>
                     </div>
 
                     <div class="col-3 col-6-medium col-12-small">
-                        <img class="image fit" src="images/V2/AM-180/redim/modele%20(3).jpg" alt="">
+                        <div class="hairstyle"  data-id="3-AM-3"  data-image="images/V2/AM-180/redim/modele%20(3).jpg" data-duration="390">
+                            <img class="image fit" src="images/V2/AM-180/redim/modele%20(3).jpg" alt="">
+                        </div>
                     </div>
 
                     <div class="col-3 col-6-medium col-12-small">
-                        <img class="image fit" src="images/V2/AM-180/redim/modele%20(4).jpg" alt="">
+                        <div class="hairstyle"  data-id="3-AM-4"  data-image="images/V2/AM-180/redim/modele%20(4).jpg" data-duration="390">
+                            <img class="image fit" src="images/V2/AM-180/redim/modele%20(4).jpg" alt="">
+                        </div>
                     </div>
 
                     <div class="col-3 col-6-medium col-12-small">
-                        <img class="image fit" src="images/V2/AM-180/redim/modele%20(5).jpg" alt="">
+                        <div class="hairstyle"  data-id="3-AM-5"  data-image="images/V2/AM-180/redim/modele%20(5).jpg" data-duration="390">
+                            <img class="image fit" src="images/V2/AM-180/redim/modele%20(5).jpg" alt="">
+                        </div>
                     </div>
 
                     <div class="col-3 col-6-medium col-12-small">
@@ -57,9 +67,6 @@
                 </div>
 
             </section>
-            <div class="reservation">
-                <script id="setmore_script" type="text/javascript" src="https://assets.setmore.com/integration/static/setmoreIframeLive.js"></script><a style="float: none" id="Setmore_button_iframe" href="https://gracioushair.setmore.com"><img border="none" src="https://assets.setmore.com/integration/images/newdesign/others/book-now-button.svg" alt="Book an appointment with Gracious Hair using Setmore" /></a>
-            </div>
 
         </article>
 
@@ -82,6 +89,27 @@
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/supabaseClient.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        document.querySelectorAll(".hairstyle").forEach(style => {
+
+            style.addEventListener("click", () => {
+
+                localStorage.setItem("selectedStyleId", style.dataset.id);
+                localStorage.setItem("selectedStyleImage", style.dataset.image);
+                localStorage.setItem("selectedStyleDuration", style.dataset.duration);
+
+                window.location.href = "index.html#book";
+
+            });
+
+        });
+
+    });
+</script>
 
 </body>
 </html>

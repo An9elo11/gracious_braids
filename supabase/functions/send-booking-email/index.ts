@@ -23,7 +23,7 @@ serve(async (req) => {
 
   try {
 
-    const { name, email, date, time, hairstyle, image } = await req.json();
+    const { name, email, date, time, duration, hairstyle, image } = await req.json();
 
     const resend = new Resend(
         Deno.env.get("RESEND_API_KEY")
@@ -39,6 +39,7 @@ serve(async (req) => {
         <p><strong>Coiffure :</strong> ${hairstyle}</p>
         <p><strong>Date :</strong> ${date}</p>
         <p><strong>Heure :</strong> ${time}</p>
+        <p><strong>Durée :</strong> ${duration}</p>
         
         <h3>Votre modèle :</h3>
           <img src="${image}" width="250" style="border-radius:10px"/>
