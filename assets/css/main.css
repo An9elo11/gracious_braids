@@ -285,6 +285,22 @@ hr.short {
 	}
 }
 
+.fc-header-toolbar {
+    flex-wrap: nowrap !important;
+}
+
+.fc-toolbar-chunk {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+@media (max-width: 480px) {
+    .fc-toolbar-title {
+        font-size: 1rem;
+    }
+}
+
 /* Row */
 
 	.row {
