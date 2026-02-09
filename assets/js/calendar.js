@@ -70,9 +70,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         },
 
         headerToolbar: {
-            left: 'prev,next today',
+            left: 'today',
             center: 'title',
-            right: isMobile ? 'dayGridDay' : 'timeGridWeek,timeGridDay'
+            right: 'prev,next'
         },
 
         height: 'auto', // pour s’adapter aux petits écrans
