@@ -13,9 +13,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         initialView: isMobile ? 'timeGridDay' : 'timeGridWeek',
 
         selectable: true,
-
         selectMirror: true,
-        selectLongPressDelay: 0,
+        selectLongPressDelay: 100,
+        //selectMinDistance: 8,
+        //unselectAuto: true,
 
         datesSet: function () {
             setTimeout(() => {
