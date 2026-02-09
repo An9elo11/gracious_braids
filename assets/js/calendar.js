@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         selectable: true,
         selectMirror: true,
-        selectLongPressDelay: 100,
+        selectLongPressDelay: 150,
         //selectMinDistance: 8,
         //unselectAuto: true,
 
