@@ -100,17 +100,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(insertError) throw insertError;
 
+            const BASE_URL = "https://gracious-braids.netlify.app/";
+
+            let fullImageUrl = selectedStyleImage;
+
+            if (!fullImageUrl.startsWith("http")) {
+                fullImageUrl = BASE_URL + fullImageUrl;
+            }
+
             // Envoyer email de confirmation
             const { data, error: emailError } =
                 await supabaseClient.functions.invoke("send-booking-email", {
                     body: {
                         name,
                         email,
+                        phone,
                         date: selectedDate,
                         time: selectedTime,
                         duration: selectedStyleDuration,
                         hairstyle: selectedStyleId,
-                        image: selectedStyleImage
+                        image: fullImageUrl
                     }
                 });
 
@@ -120,10 +129,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             alert("Réservation confirmée !");
 
+            // Supprime le preview violet
+            const preview = window.calendar.getEventById("preview");
+            if (preview) preview.remove();
+
+            // Recharge uniquement les réservations
+            window.calendar.removeAllEvents();
+            await window.loadReservations(window.calendar);
+
+            // Nettoyage
             localStorage.removeItem("selectedDate");
             localStorage.removeItem("selectedTime");
 
-            location.reload();
+            //location.reload();
 
         } catch(err){
             console.error(err);

@@ -23,7 +23,7 @@ serve(async (req) => {
 
   try {
 
-    const { name, email, date, time, duration, hairstyle, image } = await req.json();
+    const { name, email, phone, date, time, duration, hairstyle, image } = await req.json();
 
     const resend = new Resend(
         Deno.env.get("RESEND_API_KEY")
@@ -36,6 +36,7 @@ serve(async (req) => {
       html: `
         <h2>Réservation confirmée</h2>
         <p><strong>Nom :</strong> ${name}</p>
+        <p><strong>Téléphone :</strong> ${phone}</p>
         <p><strong>Coiffure :</strong> ${hairstyle}</p>
         <p><strong>Date :</strong> ${date}</p>
         <p><strong>Heure :</strong> ${time}</p>
@@ -43,6 +44,19 @@ serve(async (req) => {
         
         <h3>Votre modèle :</h3>
           <img src="${image}" width="250" style="border-radius:10px"/>
+          
+          <h2>Politique :</h2>
+          <ul>
+              <li>Les modèles présentés sont juste des prototypes</li>
+              <li>20$ de réservation requise au 438 773 7890</li>
+              <li>Vous pouvez m'écrire directement sur WhatsApp si votre modèle n'est pas sur le site</li>
+              <li>Le reste du paiement se fait en cash sur place</li>
+              <li>Service à domicile, écrivez-moi directement</li>
+              <li>Cheveux bien lavés et lissés, sinon 10$ pour les lisser</li>
+              <li>5$ de plus pour chaque 10 min de retard</li>
+              <li>Appellez 2 jours à l'avance pour annuler</li>
+              <li>Enfant et adultes acceptés</li>
+          </ul>
       `
     });
 

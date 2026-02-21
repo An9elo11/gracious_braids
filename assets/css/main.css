@@ -306,6 +306,41 @@ hr.short {
 	color: grey
 }
 
+/* ===== Scroll horizontal coiffures ===== */
+
+.hairstyle-scroll {
+	display: flex;
+	gap: 20px;
+	overflow-x: auto;
+	padding: 10px 0;
+	scroll-behavior: smooth;
+}
+
+.hairstyle-scroll::-webkit-scrollbar {
+	height: 8px;
+}
+
+.hairstyle-scroll::-webkit-scrollbar-thumb {
+	background: #ccc;
+	border-radius: 4px;
+}
+
+.hairstyle-card {
+	flex: 0 0 auto;
+	width: 220px;
+}
+
+.hairstyle-card img {
+	width: 100%;
+	border-radius: 12px;
+	cursor: pointer;
+	transition: transform 0.3s ease;
+}
+
+.hairstyle-card img:hover {
+	transform: scale(1.05);
+}
+
 /* Row */
 
 	.row {
