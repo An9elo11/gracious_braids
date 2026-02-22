@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         initialView: isMobile ? 'timeGridDay' : 'timeGridWeek',
 
+        locale: 'fr',
         selectable: true,
         selectMirror: false,
         selectLongPressDelay: 250,
@@ -115,8 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
 
         headerToolbar: {
-            left: 'today',
-            center: 'title',
+            left: 'title',
             right: 'prev,next'
         },
 
