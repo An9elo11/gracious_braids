@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         businessHours: [
             {
-                daysOfWeek: [2,4],
+                daysOfWeek: [3,4],
                 startTime: '09:00',
                 endTime: '18:00'
             },
