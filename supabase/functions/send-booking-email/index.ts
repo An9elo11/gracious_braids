@@ -17,21 +17,26 @@ const corsHeaders = {
 
 serve(async (req) => {
 
+  console.log("Function triggered");
+
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
   try {
+    const body = await req.json();
 
-    const { name, email, phone, date, time, duration, hairstyle, image } = await req.json();
+    console.log("Body reçu :", body);
+
+    const { name, email, phone, date, time, duration, hairstyle, image } = body;
 
     const resend = new Resend(
         Deno.env.get("RESEND_API_KEY")
     );
 
     const { data, error } = await resend.emails.send({
-      from: "Gracious Hair <onboarding@resend.dev>",
-      to: [email,"kouakanange@gmail.com"],
+      from: "Gracious Hair <no-reply@resend.dev>",
+      to: ["kouakanange@gmail.com"],
       subject: "Confirmation de réservation",
       html: `
         <h2>Réservation confirmée</h2>
@@ -59,6 +64,9 @@ serve(async (req) => {
           </ul>
       `
     });
+
+    console.log("Resend data:", data);
+    console.log("Resend error:", error);
 
     if (error) {
       throw error;

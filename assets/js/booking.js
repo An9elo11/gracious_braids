@@ -123,6 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
 
+            console.log("Email response:", data, emailError);
+
             if(emailError){
                 console.error("Erreur email :", emailError);
             }

@@ -107,6 +107,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 title: "Votre créneau",
                 start,
                 end,
+
+                display: "background",
+                overlap: true,
+
                 backgroundColor: '#6c5ce7',
                 borderColor: '#341f97',
                 textColor: '#ffffff'
@@ -166,7 +170,7 @@ function isWithinBusinessHours(start, end) {
     const startMinutes = start.getHours() * 60 + start.getMinutes();
     const endMinutes = end.getHours() * 60 + end.getMinutes();
 
-    if (day === 2 || day === 4) {
+    if (day === 4) {
         return startMinutes >= 9*60 && endMinutes <= 18*60;
     }
 
