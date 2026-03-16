@@ -36,7 +36,8 @@ serve(async (req) => {
 
     const { data, error } = await resend.emails.send({
       from: "Gracious Hair <no-reply@resend.dev>",
-      to: ["kouakanange@gmail.com"],
+      to: [email],
+      bcc: ["kouakanange@gmail.com", "kouakanange213@gmail.com", "kouakan.assemian_ange_uriel@courrier.uqam.ca"],
       subject: "Confirmation de réservation",
       html: `
         <h2>Réservation confirmée</h2>
