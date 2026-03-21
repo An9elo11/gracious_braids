@@ -19,6 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // Affichage coiffure choisie
     if(display && selectedStyleId){
 
+        if (window.calendar) {
+
+            const slots = getAvailableSlots(window.calendar);
+
+            const selectedDate = localStorage.getItem("selectedDate");
+
+            const filtered = slots.filter(slot =>
+                formatLocalDate(slot) === selectedDate
+            );
+
+            renderSlots(filtered);
+        }
+
         display.innerHTML = `
             <h3>Coiffure choisie :</h3>
             <img src="${selectedStyleImage}" width="150">
@@ -131,13 +144,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             alert("Réservation confirmée !");
 
+            location.reload();
+
             // Supprime le preview violet
             const preview = window.calendar.getEventById("preview");
             if (preview) preview.remove();
 
             // Recharge uniquement les réservations
             window.calendar.removeAllEvents();
-            await window.loadReservations(window.calendar);
+            await loadReservations(window.calendar);
+            displayAvailableSlots(window.calendar);
 
             // Nettoyage
             localStorage.removeItem("selectedDate");

@@ -226,13 +226,26 @@
                 <h1>Réservations</h1>
             </header>
 
-            <p id="mobile">Sur mobile, restez appuyé quelques secondes pour valider la réservation !</p><br>
+            <h2>Comment effectuer une réservation :</h2>
+            <br>
+            <ul>
+                <li>Consultez le calendrier pour voir les créneaux disponibles (les bandes vertes représentent les shifts offerts)</li>
+                <li>Choisissez une journée en cliquant sur la case du jour sélectionné à ligne "all-day"</li>
+                <li>Choisissez un créneau parmi ceux disponibles en-dessous du calendrier</li>
+                <li>Remplissez le formulaire de réservation</li>
+                <li>Cliquez sur "Réserver"</li>
+            </ul>
+            <br>
 
             <!-- Conteneur du calendrier avec une classe pro -->
             <div id="calendar" class="calendar-container"></div>
 
             <!-- Affichage coiffure sélectionnée -->
             <div id="selected-style-display" class="selected-style"></div>
+
+            <h3 id="selected-day-label"></h3>
+
+            <div id="slots-container"></div>
 
             <!-- Formulaire de réservation -->
             <form id="booking-form" class="booking-form">
