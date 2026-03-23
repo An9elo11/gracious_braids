@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.calendar = new FullCalendar.Calendar(calendarEl, {
 
-        initialView: isMobile ? 'timeGridWeek' : 'timeGridWeek',
+        initialView: isMobile ? 'timeGridDay' : 'timeGridWeek',
 
         locale: 'fr',
         selectable: false,
