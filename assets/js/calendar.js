@@ -456,6 +456,7 @@ function displayAvailableSlots(calendar) {
             id: "range-" + range.start.getTime(),
             start: range.start,
             end: range.end,
+            title : "Disponible",
             display: "block",
             backgroundColor: "#2ecc71",
             overlap: false,
