@@ -2,7 +2,7 @@ let selectedDate = null;
 let selectedTime = null;
 let previewEvent = null;
 
-const WORK_SCHEDULE = {
+/*const WORK_SCHEDULE = {
     3: [ // mercredi
         { start: "08:30", end: "12:00" },
         { start: "12:30", end: "16:30" },
@@ -17,12 +17,59 @@ const WORK_SCHEDULE = {
         { start: "12:30", end: "16:30" },
         { start: "16:30", end: "22:00" }
     ]
-};
+};*/
 
-document.addEventListener('DOMContentLoaded', function () {
+let WORK_SCHEDULE = {}
+
+async function loadAvailability() {
+
+    const { data, error } = await supabaseClient
+        .from("availability")
+        .select("*");
+
+    if(error){
+        console.error(error);
+        return;
+    }
+
+    WORK_SCHEDULE = {};
+
+    data.forEach(slot => {
+
+        if(!WORK_SCHEDULE[slot.day_of_week]){
+            WORK_SCHEDULE[slot.day_of_week] = [];
+        }
+
+        WORK_SCHEDULE[slot.day_of_week].push({
+            start: slot.start_time.substring(0,5),
+            end: slot.end_time.substring(0,5)
+        });
+    });
+
+    console.log("Horaires chargés :", WORK_SCHEDULE);
+}
+
+document.addEventListener('DOMContentLoaded', async function () {
+
+    await loadAvailability();
 
     const calendarEl = document.getElementById('calendar');
     if (!calendarEl) return;
+
+    const businessHours = [];
+
+    for(const day in WORK_SCHEDULE){
+
+        WORK_SCHEDULE[day].forEach(period => {
+
+            businessHours.push({
+                daysOfWeek: [Number(day)],
+                startTime: period.start,
+                endTime: period.end
+            });
+
+        });
+    }
 
     const isMobile = window.innerWidth <= 768;
 
@@ -61,7 +108,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         ],*/
 
-        businessHours: [
+        businessHours: businessHours,
+        /*[
             {
                 daysOfWeek: [3,5],
                 startTime: '08:30',
@@ -72,11 +120,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 startTime: '09:00',
                 endTime: '18:00'
             }
-        ],
+        ],*/
 
-        businessHoursColor: "#e0e0e0",
+        //businessHoursColor: "#e0e0e0",
 
-        // 🔥 BLOQUE TOUT CHEVAUCHEMENT ICI
+        // BLOQUE TOUT CHEVAUCHEMENT ICI
         /*selectAllow: function(selectInfo) {
 
             const duration = Number(localStorage.getItem("selectedStyleDuration"));

@@ -24,6 +24,7 @@
         <!--a href="#" class="icon solid fa-home"><span>Home</span></a-->
         <a href="#work" class="icon solid fa-folder"><span>Modèles</span></a>
         <a href="#book" class="icon solid fa-calendar"><span>Réservation</span></a>
+        <a href="#admin" class="icon solid fa-address-book"><span>Admin</span></a>
         <a href="https://www.instagram.com/coiffeuse_a_montreal?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="icon brands fa-instagram" target="_blank"><span>Instagram</span></a>
         <a href="https://www.tiktok.com/@coiffeusemontreal?is_from_webapp=1&sender_device=pc" class="icon brands fa-tiktok" target="_blank"><span>TikTok</span></a>
     </nav>
@@ -230,10 +231,11 @@
             <br>
             <ul>
                 <li>Consultez le calendrier pour voir les créneaux disponibles (les bandes vertes représentent les shifts offerts)</li>
-                <li>Choisissez une journée en cliquant sur la case du jour sélectionné à ligne "all-day"</li>
-                <li>Choisissez un créneau parmi ceux disponibles en-dessous du calendrier</li>
+                <li>Choisissez une journée en cliquant sur la case du jour sélectionné à la ligne "all-day" (sur ordinateur), ou avec les flèches (sur mobile)</li>
+                <li>Choisissez un créneau parmi ceux disponibles en-dessous du calendrier. Les créneaux qui apparaissent correspondent à l'heure de début de l'intervalle dans lequel la coiffure pourra être réalisé (Impossible donc de débuter une coiffure d'une durée de 5h30 à 18h par exemple.)</li>
                 <li>Remplissez le formulaire de réservation</li>
                 <li>Cliquez sur "Réserver"</li>
+                <li>Vérifiez que vous avez bien reçu un courriel de confirmation</li>
             </ul>
             <br>
 
@@ -261,6 +263,11 @@
                 <br><br>
                 <button type="submit" class="btn-submit">Réserver</button>
             </form>
+        </article>
+        <article id="admin" class="panel">
+            <h1>Page Admin</h1>
+
+            <button class="button"><a href="admin.html#admin">Se connecter</a></button>
         </article>
 
 
@@ -304,11 +311,11 @@
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="assets/js/supabaseClient.js"></script>
 <script src="assets/js/calendar.js"></script>
 <script src="assets/js/booking.js"></script>
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>

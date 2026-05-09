@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ajustement calendrier si bloc change taille
     if(display){
         const resizeObserver = new ResizeObserver(() => {
-            if(window.calendar){
+            if(window.calendar && typeof window.calendar.updateSize === "function"){
                 window.calendar.updateSize();
             }
         });
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Affichage coiffure choisie
     if(display && selectedStyleId){
 
-        if (window.calendar) {
+        if (window.calendar && window.calendar.view) {
 
             const slots = getAvailableSlots(window.calendar);
 
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
         setTimeout(() => {
-            if(window.calendar){
+            if(window.calendar && typeof window.calendar.updateSize === "function"){
                 window.calendar.updateSize();
             }
         }, 100);
@@ -99,6 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // ➕ Ajouter réservation
+            const { data: userData } = await supabaseClient.auth.getUser();
+
+            console.log("USER :", userData);
+
             const { error: insertError } = await supabaseClient
                 .from("reservations")
                 .insert([{
