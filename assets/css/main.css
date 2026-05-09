@@ -2043,6 +2043,52 @@ hr.short {
 			margin-bottom: 1em;
 		}
 
+/* =========================
+   ADMIN SHIFTS
+========================= */
+
+.slot-row{
+	display:flex;
+	align-items:center;
+	gap:10px;
+	margin-bottom:12px;
+}
+
+.slot-row input[type="time"]{
+	flex:1;
+	min-width:0;
+}
+
+.slot-row button{
+	white-space:nowrap;
+	padding:0 16px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media screen and (max-width: 736px){
+
+	.slot-row{
+		flex-direction:column;
+		align-items:stretch;
+	}
+
+	.slot-row input[type="time"]{
+		width:100%;
+	}
+
+	.slot-row button{
+		width:100%;
+		margin-top:5px;
+	}
+
+	.day-block > button{
+		width:100%;
+		margin-top:10px;
+	}
+}
 
 /* List */
 
