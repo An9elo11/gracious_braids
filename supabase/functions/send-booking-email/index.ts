@@ -1,3 +1,4 @@
+//index.ts
 // Follow this setup guide to integrate the Deno language server with your editor:
 // https://deno.land/manual/getting_started/setup_your_environment
 // This enables autocomplete, go to definition, etc.
@@ -17,44 +18,67 @@ const corsHeaders = {
 
 serve(async (req) => {
 
-  console.log("Function triggered");
-
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
   try {
     const body = await req.json();
+    const { type } = body; // "booking" ou "cancellation"
 
-    console.log("Body reçu :", body);
+    const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
-    const { name, email, phone, date, time, duration, hairstyle, image } = body;
+    let emailContent;
 
-    const resend = new Resend(
-        Deno.env.get("RESEND_API_KEY")
-    );
+    if (type === "cancellation") {
 
-    const { data, error } = await resend.emails.send({
-      from: "Gracious Hair <booking@gracious.hair>",
-      to: [email],
-      bcc: ["kouakanange@gmail.com", "gracioushair07@gmail.com"],
-      subject: "Confirmation de réservation",
-      html: `
-        <h2>Réservation confirmée</h2>
-        <p><strong>Nom :</strong> ${name}</p>
-        <p><strong>Téléphone :</strong> ${phone}</p>
-        <p><strong>Coiffure :</strong> ${hairstyle}</p>
-        <p><strong>Date :</strong> ${date}</p>
-        <p><strong>Heure :</strong> ${time}</p>
-        <p><strong>Durée :</strong> ${duration}</p>
-        
-        <h3>Votre modèle :</h3>
+      const { name, email, date, time, hairstyle } = body;
+
+      emailContent = {
+        from: "Gracious Hair <booking@gracious.hair>",
+        to: [email],
+        bcc: ["kouakanange@gmail.com"],
+        subject: "Annulation de votre réservation",
+        html: `
+          <h2>Votre réservation a été annulée</h2>
+          <p>Bonjour <strong>${name}</strong>,</p>
+          <p>Nous vous informons que votre rendez-vous a été annulé.</p>
+          <br>
+          <p><strong>Coiffure :</strong> ${hairstyle}</p>
+          <p><strong>Date :</strong> ${date}</p>
+          <p><strong>Heure :</strong> ${time}</p>
+          <br>
+          <p>Pour reprendre un rendez-vous, visitez <a href="https://gracious.hair">gracious.hair</a></p>
+          <p>Pour toute question, contactez-nous au XXX XXX-XXXX.</p>
+          <br>
+          <p>Désolée pour la gêne occasionnée.</p>
+        `
+      };
+
+    } else {
+
+      // Email de confirmation existant
+      const { name, email, phone, date, time, duration, hairstyle, image } = body;
+
+      emailContent = {
+        from: "Gracious Hair <booking@gracious.hair>",
+        to: [email],
+        bcc: ["kouakanange@gmail.com"],
+        subject: "Confirmation de réservation",
+        html: `
+          <h2>Réservation confirmée</h2>
+          <p><strong>Nom :</strong> ${name}</p>
+          <p><strong>Téléphone :</strong> ${phone}</p>
+          <p><strong>Coiffure :</strong> ${hairstyle}</p>
+          <p><strong>Date :</strong> ${date}</p>
+          <p><strong>Heure :</strong> ${time}</p>
+          <p><strong>Durée :</strong> ${duration}</p>
+          <h3>Votre modèle :</h3>
           <img src="${image}" width="250" style="border-radius:10px"/>
-          
           <h2>Politique :</h2>
           <ul>
               <li>Les modèles présentés sont juste des prototypes</li>
-              <li>20$ de réservation requise au 438 773 7890</li>
+              <li>20$ de réservation requise au XXX XXX-XXXX</li>
               <li>Vous pouvez m'écrire directement sur WhatsApp si votre modèle n'est pas sur le site</li>
               <li>Le reste du paiement se fait en cash sur place</li>
               <li>Service à domicile, écrivez-moi directement</li>
@@ -63,38 +87,26 @@ serve(async (req) => {
               <li>Appellez 2 jours à l'avance pour annuler</li>
               <li>Enfant et adultes acceptés</li>
           </ul>
-      `
-    });
-
-    console.log("Resend data:", data);
-    console.log("Resend error:", error);
-
-    if (error) {
-      throw error;
+        `
+      };
     }
+
+    const { data, error } = await resend.emails.send(emailContent);
+
+    if (error) throw error;
 
     return new Response(
         JSON.stringify({ success: true, data }),
-        {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 200
-        }
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
     );
 
   } catch (err) {
-
     return new Response(
         JSON.stringify({ success: false, error: err.message }),
-        {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 400
-        }
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
     );
-
   }
-
 });
-
 
 /* To invoke locally:
 

@@ -1,3 +1,4 @@
+//calendar.js
 let selectedDate = null;
 let selectedTime = null;
 let previewEvent = null;
@@ -248,6 +249,38 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         dateClick: function(info) {
 
+            if (window.calendar.view.type === 'dayGridMonth') {
+                const isMobile = window.innerWidth <= 768;
+
+                // Stocker la date AVANT le changeView
+                const chosenDate = info.dateStr;
+
+                window.calendar.changeView(
+                    isMobile ? 'timeGridDay' : 'timeGridWeek',
+                    chosenDate
+                );
+
+                // Forcer la sélection sur le bon jour APRÈS le rendu
+                setTimeout(() => {
+                    const fakeDate = new Date(chosenDate + 'T00:00:00');
+
+                    localStorage.setItem("selectedDate", chosenDate);
+
+                    const options = { weekday: 'long', day: 'numeric', month: 'long' };
+                    const formattedLabel = fakeDate.toLocaleDateString('fr-FR', options);
+                    document.getElementById("selected-day-label").innerText =
+                        "Créneaux pour " + formattedLabel;
+
+                    const slots = getAvailableSlots(window.calendar);
+                    const filtered = slots.filter(slot =>
+                        formatLocalDate(slot) === chosenDate
+                    );
+                    renderSlots(filtered);
+                }, 50);
+
+                return;
+            }
+
             const selectedDay = formatLocalDate(info.date);
             localStorage.setItem("selectedDate", selectedDay);
 
@@ -311,7 +344,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         headerToolbar: {
             left: 'title',
-            right: 'prev,next'
+            right: 'prev,next today dayGridMonth'
+        },
+
+        views: {
+            dayGridMonth: {
+                type: 'dayGridMonth',
+                buttonText: 'Calendrier'
+            }
         },
 
         height: 'auto'

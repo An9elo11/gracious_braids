@@ -1,3 +1,4 @@
+//admin.js
 const days = {
     0: "Dimanche",
     1: "Lundi",
@@ -58,6 +59,8 @@ async function loadAdmin() {
 
     document.getElementById("login-section").style.display = "none";
     document.getElementById("admin-section").style.display = "block";
+
+    await loadReservations();
 
     const { data, error } = await supabaseClient
         .from("availability")
@@ -253,4 +256,101 @@ async function saveAll() {
         console.error(err);
         alert("Erreur sauvegarde.");
     }
+}
+
+async function loadReservations() {
+
+    const { data, error } = await supabaseClient
+        .from("reservations")
+        .select("*")
+        .order("appointment_date", { ascending: true })
+        .order("appointment_time", { ascending: true });
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    const container = document.getElementById("reservations-container");
+    container.innerHTML = "";
+
+    if (data.length === 0) {
+        container.innerHTML = "<p>Aucune réservation.</p>";
+        return;
+    }
+
+    data.forEach(res => {
+
+        const row = document.createElement("div");
+        row.classList.add("reservation-row");
+
+        row.innerHTML = `
+            <div class="reservation-info">
+                <strong>${res.name}</strong>
+                <span>${res.appointment_date} à ${res.appointment_time}</span>
+                <span>${res.hairstyle_id} — ${res.duration} min</span>
+                <span>${res.email} | ${res.phone}</span>
+            </div>
+        `;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.type = "button";
+        deleteBtn.innerText = "Annuler";
+        deleteBtn.classList.add("btn-cancel");
+
+        deleteBtn.addEventListener("click", async () => {
+            if (!confirm(`Annuler le rendez-vous de ${res.name} ?`)) return;
+            await cancelReservation(res.id);
+        });
+
+        row.appendChild(deleteBtn);
+        container.appendChild(row);
+    });
+}
+
+async function cancelReservation(id) {
+
+    // Récupère les infos de la réservation avant de la supprimer
+    const { data: res, error: fetchError } = await supabaseClient
+        .from("reservations")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (fetchError) {
+        console.error(fetchError);
+        alert("Erreur lors de la récupération de la réservation.");
+        return;
+    }
+
+    // Supprime la réservation
+    const { error } = await supabaseClient
+        .from("reservations")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+        console.error(error);
+        alert("Erreur lors de l'annulation.");
+        return;
+    }
+
+    // Envoie l'email d'annulation
+    const { error: emailError } = await supabaseClient.functions.invoke("send-booking-email", {
+        body: {
+            type: "cancellation",
+            name: res.name,
+            email: res.email,
+            date: res.appointment_date,
+            time: res.appointment_time,
+            hairstyle: res.hairstyle_id
+        }
+    });
+
+    if (emailError) {
+        console.error("Erreur email annulation :", emailError);
+    }
+
+    alert("Réservation annulée et email envoyé au client.");
+    await loadReservations();
 }

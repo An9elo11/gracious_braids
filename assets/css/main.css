@@ -2615,3 +2615,286 @@ hr.short {
 			}
 
 		}
+
+/* =============================================
+   FULLCALENDAR — CUSTOM DESIGN
+   À ajouter à la fin de main.css
+   Compatible avec le thème Gracious Hair (violet/rose)
+   ============================================= */
+
+/* Conteneur général */
+.fc {
+	background: #ffffff;
+	border-radius: 16px;
+	padding: 12px;
+	box-shadow: 0 8px 30px rgba(108, 92, 231, 0.12);
+	border: 1px solid rgba(108, 92, 231, 0.1);
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* ---- HEADER TOOLBAR ---- */
+.fc-header-toolbar {
+	padding: 8px 4px 12px;
+	margin-bottom: 12px !important;
+	border-bottom: 1px solid rgba(108, 92, 231, 0.1);
+}
+
+.fc-toolbar-title {
+	font-size: 1.1em !important;
+	font-weight: 600 !important;
+	color: #341f97 !important;
+	letter-spacing: 0.01em;
+}
+
+/* Boutons prev/next */
+.fc-prev-button,
+.fc-next-button {
+	background: linear-gradient(135deg, #e8e0ff, #f5d0ff) !important;
+	border: none !important;
+	border-radius: 50% !important;
+	width: 34px !important;
+	height: 34px !important;
+	padding: 0 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	box-shadow: none !important;
+	transition: transform 0.2s ease, background 0.2s ease !important;
+}
+
+.fc-prev-button:hover,
+.fc-next-button:hover {
+	background: linear-gradient(135deg, #d4c3ff, #f0b8ff) !important;
+	transform: scale(1.08) !important;
+}
+
+.fc-prev-button .fc-icon,
+.fc-next-button .fc-icon {
+	color: #6c5ce7 !important;
+	font-size: 1em !important;
+}
+
+/* ---- EN-TÊTES DES JOURS ---- */
+.fc-col-header-cell {
+	background: linear-gradient(135deg, #f0ecff, #fce8ff) !important;
+	border: none !important;
+	padding: 10px 0 !important;
+}
+
+.fc-col-header-cell-cushion {
+	font-size: 0.78em !important;
+	font-weight: 600 !important;
+	color: #6c5ce7 !important;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	text-decoration: none !important;
+}
+
+/* ---- GRILLE HORAIRE ---- */
+.fc-timegrid-slot {
+	height: 52px !important;
+	border-color: rgba(108, 92, 231, 0.07) !important;
+}
+
+.fc-timegrid-slot-label-cushion {
+	font-size: 0.72em !important;
+	color: #b2a8e0 !important;
+	font-weight: 500;
+}
+
+.fc-timegrid-axis {
+	border-color: rgba(108, 92, 231, 0.07) !important;
+}
+
+/* Ligne "all-day" */
+.fc-daygrid-day {
+	background: #fafafa !important;
+}
+
+.fc-timegrid-col {
+	border-color: rgba(108, 92, 231, 0.07) !important;
+}
+
+/* ---- ÉVÉNEMENTS ---- */
+
+/* Créneaux disponibles (vert) */
+.fc-event[style*="rgb(46, 204, 113)"],
+.fc-event[style*="#2ecc71"] {
+	background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+	border: none !important;
+	border-radius: 8px !important;
+	box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3) !important;
+	opacity: 0.92;
+}
+
+/* Réservations (rouge) */
+.fc-event[style*="rgb(231, 76, 60)"],
+.fc-event[style*="#e74c3c"] {
+	background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+	border: none !important;
+	border-radius: 8px !important;
+	box-shadow: 0 2px 8px rgba(231, 76, 60, 0.25) !important;
+}
+
+/* Preview sélection (violet) */
+.fc-event[style*="rgb(108, 92, 231)"],
+.fc-event[style*="#6c5ce7"] {
+	background: linear-gradient(135deg, #6c5ce7, #341f97) !important;
+	border: none !important;
+	border-radius: 8px !important;
+	box-shadow: 0 2px 8px rgba(108, 92, 231, 0.3) !important;
+}
+
+/* Texte dans tous les événements */
+.fc-event-title,
+.fc-event-time {
+	font-size: 0.75em !important;
+	font-weight: 600 !important;
+	padding: 2px 4px !important;
+}
+
+/* ---- BUSINESS HOURS (heures non travaillées) ---- */
+.fc-non-business {
+	background: repeating-linear-gradient(
+			45deg,
+			rgba(0, 0, 0, 0.02),
+			rgba(0, 0, 0, 0.02) 4px,
+			transparent 4px,
+			transparent 10px
+	) !important;
+}
+
+/* ---- COLONNE SÉLECTIONNÉE ---- */
+.fc-col-highlight {
+	background-color: rgba(108, 92, 231, 0.08) !important;
+	transition: background 0.2s ease;
+}
+
+/* ---- LIGNE "NOW" ---- */
+.fc-timegrid-now-indicator-line {
+	border-color: #e84393 !important;
+	border-width: 2px !important;
+}
+
+.fc-timegrid-now-indicator-arrow {
+	border-top-color: #e84393 !important;
+	border-bottom-color: #e84393 !important;
+}
+
+/* ---- SCROLLBAR INTERNE ---- */
+.fc-scroller::-webkit-scrollbar {
+	width: 4px;
+}
+
+.fc-scroller::-webkit-scrollbar-thumb {
+	background: rgba(108, 92, 231, 0.25);
+	border-radius: 4px;
+}
+
+/* ---- BOUTONS DE CRÉNEAUX ---- */
+.slot-btn {
+	min-width: 90px;
+	padding: 10px 14px;
+	border-radius: 10px;
+	border: 1.5px solid rgba(108, 92, 231, 0.3);
+	background: #f8f5ff;
+	color: #6c5ce7;
+	font-size: 0.9em;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.slot-btn:hover {
+	background: linear-gradient(135deg, #2ecc71, #27ae60);
+	border-color: transparent;
+	color: #ffffff;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+}
+
+.slot-btn.selected {
+	background: linear-gradient(135deg, #6c5ce7, #341f97);
+	border-color: transparent;
+	color: #ffffff;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(108, 92, 231, 0.35);
+}
+
+/* ---- LABEL JOUR SÉLECTIONNÉ ---- */
+#selected-day-label {
+	font-size: 1em;
+	color: #6c5ce7;
+	font-weight: 600;
+	margin: 20px 0 12px;
+	padding-left: 4px;
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 768px) {
+	.fc {
+		padding: 8px;
+		border-radius: 12px;
+	}
+
+	.fc-toolbar-title {
+		font-size: 0.95em !important;
+	}
+
+	.fc-timegrid-slot {
+		height: 44px !important;
+	}
+
+	.fc-col-header-cell-cushion {
+		font-size: 0.7em !important;
+	}
+
+	.fc-event-title {
+		font-size: 0.65em !important;
+	}
+}
+
+
+.reservation-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 14px 16px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	border: 1px solid rgba(108, 92, 231, 0.15);
+	background: #faf8ff;
+}
+
+.reservation-info {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	font-size: 0.85em;
+}
+
+.reservation-info strong {
+	font-size: 1em;
+	color: #341f97;
+}
+
+.reservation-info span {
+	color: #777;
+}
+
+.btn-cancel {
+	background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+	color: white !important;
+	border: none !important;
+	border-radius: 8px !important;
+	padding: 8px 14px !important;
+	font-size: 0.8em !important;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: transform 0.2s ease !important;
+}
+
+.btn-cancel:hover {
+	transform: scale(1.05) !important;
+}

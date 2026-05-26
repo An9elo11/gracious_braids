@@ -1,3 +1,4 @@
+//booking.js
 document.addEventListener("DOMContentLoaded", () => {
 
     let selectedStyleId = localStorage.getItem("selectedStyleId");
@@ -129,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const { data, error: emailError } =
                 await supabaseClient.functions.invoke("send-booking-email", {
                     body: {
+                        type: "booking",
                         name,
                         email,
                         phone,
@@ -142,8 +144,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             console.log("Email response:", data, emailError);
 
+
             if(emailError){
                 console.error("Erreur email :", emailError);
+                console.error("Erreur email complète :", {
+                    message: emailError.message,
+                    context: emailError.context,
+                    details: emailError
+                });
             }
 
             alert("Réservation confirmée !");
