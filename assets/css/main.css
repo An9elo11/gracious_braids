@@ -2898,3 +2898,7 @@ hr.short {
 .btn-cancel:hover {
 	transform: scale(1.05) !important;
 }
+
+.util-calendrier {
+	font-size: 0.7em;
+}
